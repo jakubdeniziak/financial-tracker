@@ -3,6 +3,13 @@ spring:
     name: financial-tracker
   main:
     web-application-type: none
+  datasource:
+    url: jdbc:sqlite:financial_tracker.db
+    driver-class-name: org.sqlite.JDBC
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.community.dialect.SQLiteDialect
 
 application:
   title: "Financial tracker"

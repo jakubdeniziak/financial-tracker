@@ -4,3 +4,5 @@ target/
 
 *.iml
 *.env
+
+financial_tracker.db
