@@ -1,0 +1,38 @@
+package com.jakubdeniziak.financialtracker.service;
+
+import com.jakubdeniziak.financialtracker.domain.Asset;
+import com.jakubdeniziak.financialtracker.mapper.AssetMapper;
+import com.jakubdeniziak.financialtracker.repository.AssetJpaRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+@RequiredArgsConstructor
+public class AssetDefaultService implements AssetService {
+
+    private final AssetJpaRepository repository;
+    private final AssetMapper mapper;
+
+    @Override
+    public void save(Asset asset) {
+        repository.save(mapper.map(asset));
+    }
+
+    @Override
+    public Asset read(long id) {
+        return mapper.map(repository.findById(id).orElseThrow(RuntimeException::new));
+    }
+
+    @Override
+    public List<Asset> readAll() {
+        return mapper.map(repository.findAll());
+    }
+
+    @Override
+    public void delete(long id) {
+        repository.deleteById(id);
+    }
+
+}
