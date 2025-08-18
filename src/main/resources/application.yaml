@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: financial-tracker
+  main:
+    web-application-type: none
+
+application:
+  title: "Financial tracker"
+  width: 1280.0
+  height: 900.0
