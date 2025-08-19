@@ -7,7 +7,7 @@ import lombok.Value;
 @Value
 public class Asset {
 
-    Long id;
+    long id;
     String name;
     String symbol;
     AssetCategory category;

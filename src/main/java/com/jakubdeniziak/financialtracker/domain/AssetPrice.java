@@ -10,7 +10,7 @@ import java.time.ZonedDateTime;
 @Builder
 public class AssetPrice {
 
-    Long id;
+    long id;
     Asset asset;
     BigDecimal price;
     String currency;
