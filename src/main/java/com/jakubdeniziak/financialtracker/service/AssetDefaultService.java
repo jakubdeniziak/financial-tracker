@@ -3,6 +3,7 @@ package com.jakubdeniziak.financialtracker.service;
 import com.jakubdeniziak.financialtracker.domain.Asset;
 import com.jakubdeniziak.financialtracker.mapper.AssetMapper;
 import com.jakubdeniziak.financialtracker.repository.AssetJpaRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +23,7 @@ public class AssetDefaultService implements AssetService {
 
     @Override
     public Asset read(long id) {
-        return mapper.map(repository.findById(id).orElseThrow(RuntimeException::new));
+        return mapper.map(repository.findById(id).orElseThrow(EntityNotFoundException::new));
     }
 
     @Override
