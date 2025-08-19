@@ -14,6 +14,7 @@ public interface AssetPriceMapper {
     AssetPriceEntity map(AssetPrice assetPrice);
 
     AssetPrice map(AssetPriceEntity assetPriceEntity);
+
     List<AssetPrice> map(List<AssetPriceEntity> assetPriceEntities);
 
 }
