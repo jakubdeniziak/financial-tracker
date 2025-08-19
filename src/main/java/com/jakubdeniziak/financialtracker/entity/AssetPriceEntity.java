@@ -21,13 +21,15 @@ public class AssetPriceEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private BigDecimal price;
+
+    private String currency;
+
+    private ZonedDateTime recordedAt;
+
     @ManyToOne
     @JoinColumn(name = "asset_id", nullable = false)
     private AssetEntity asset;
-
-    private BigDecimal price;
-    private String currency;
-    private ZonedDateTime recordedAt;
 
     @Override
     public final boolean equals(Object o) {

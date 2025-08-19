@@ -20,9 +20,15 @@ public class AssetEntity {
     private Long id;
 
     private String name;
+
     private String symbol;
+
+    @Enumerated(EnumType.STRING)
     private AssetCategory category;
+
+    @Enumerated(EnumType.STRING)
     private AssetType type;
+
     private String currency;
 
     @Override
