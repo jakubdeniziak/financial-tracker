@@ -3,14 +3,137 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.jakubdeniziak.financialtracker.ui.controller.DashboardController">
 
+    <!-- TOP: Page title and currency chooser -->
     <top>
-        <HBox>
-            <Label text="Dashboard" styleClass="page-header"/>
-        </HBox>
+        <TabPane tabClosingPolicy="UNAVAILABLE">
+            <Tab text="Dashboard">
+                <VBox spacing="10">
+                    <HBox>
+                        <Label text="Dashboard" styleClass="page-header"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <ComboBox fx:id="currencyChooser" promptText="Select Currency" prefWidth="80"/>
+                    </HBox>
+                </VBox>
+            </Tab>
+        </TabPane>
     </top>
+
+    <!-- CENTER: Summary metrics -->
+    <center>
+        <GridPane hgap="30" vgap="20" alignment="CENTER">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="50"/>
+                <ColumnConstraints percentWidth="50"/>
+            </columnConstraints>
+
+            <!-- Net Worth -->
+            <StackPane GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="2" styleClass="summary-card">
+                <VBox alignment="CENTER" spacing="5">
+                    <Label text="Net Worth" styleClass="summary-title"/>
+                    <Label fx:id="netWorth" styleClass="summary-value"/>
+                </VBox>
+            </StackPane>
+
+            <!-- Total Assets -->
+            <StackPane GridPane.rowIndex="1" GridPane.columnIndex="0" styleClass="summary-card">
+                <VBox alignment="CENTER" spacing="5">
+                    <Label text="Total Assets" styleClass="summary-title"/>
+                    <Label fx:id="totalAssets" styleClass="summary-value"/>
+                </VBox>
+            </StackPane>
+
+            <!-- Total Liabilities -->
+            <StackPane GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="summary-card">
+                <VBox alignment="CENTER" spacing="5">
+                    <Label text="Total Liabilities" styleClass="summary-title"/>
+                    <Label fx:id="totalLiabilities" styleClass="summary-value"/>
+                </VBox>
+            </StackPane>
+
+            <!-- Total Investments -->
+            <StackPane GridPane.rowIndex="2" GridPane.columnIndex="0" styleClass="summary-card">
+                <VBox alignment="CENTER" spacing="5">
+                    <Label text="Total Investments" styleClass="summary-title"/>
+                    <Label fx:id="totalInvestments" styleClass="summary-value"/>
+                </VBox>
+            </StackPane>
+
+            <!-- Total Available -->
+            <StackPane GridPane.rowIndex="2" GridPane.columnIndex="1" styleClass="summary-card">
+                <VBox alignment="CENTER" spacing="5">
+                    <Label text="Total Available Cash" styleClass="summary-title"/>
+                    <Label fx:id="totalAvailable" styleClass="summary-value"/>
+                </VBox>
+            </StackPane>
+
+            <!-- Realized Gains -->
+            <StackPane GridPane.rowIndex="3" GridPane.columnIndex="0" styleClass="summary-card">
+                <VBox alignment="CENTER" spacing="5">
+                    <Label text="Realized Gains" styleClass="summary-title"/>
+                    <Label fx:id="realizedGains" styleClass="summary-value"/>
+                </VBox>
+            </StackPane>
+
+            <!-- Unrealized Gains -->
+            <StackPane GridPane.rowIndex="3" GridPane.columnIndex="1" styleClass="summary-card">
+                <VBox alignment="CENTER" spacing="5">
+                    <Label text="Unrealized Gains" styleClass="summary-title"/>
+                    <Label fx:id="unrealizedGains" styleClass="summary-value"/>
+                </VBox>
+            </StackPane>
+        </GridPane>
+    </center>
+
+    <!-- BOTTOM: Charts -->
+    <bottom>
+        <TabPane tabClosingPolicy="UNAVAILABLE" prefHeight="400">
+            <Tab text="Net Worth Over Time">
+                <LineChart fx:id="netWorthOverTimeChart" createSymbols="false" legendVisible="false">
+                    <xAxis>
+                        <CategoryAxis label="Date"/>
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis label="Value"/>
+                    </yAxis>
+                </LineChart>
+            </Tab>
+
+            <Tab text="Invested vs Available">
+                <PieChart fx:id="investedAvailableChart" title="Invested vs Available"/>
+            </Tab>
+
+            <Tab text="Asset Category Breakdown">
+                <PieChart fx:id="assetCategoryChart" title="Asset Categories"/>
+            </Tab>
+
+            <Tab text="Expenses">
+                <LineChart fx:id="expensesChart" createSymbols="false">
+                    <xAxis>
+                        <CategoryAxis label="Date"/>
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis label="Value"/>
+                    </yAxis>
+                </LineChart>
+            </Tab>
+
+        </TabPane>
+    </bottom>
 
 </BorderPane>
