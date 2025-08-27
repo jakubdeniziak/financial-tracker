@@ -1,12 +1,12 @@
 package com.jakubdeniziak.financialtracker.ui.controller.views;
 
+import com.jakubdeniziak.financialtracker.ui.controller.elements.NavigationController;
 import com.jakubdeniziak.financialtracker.util.CurrencyFormatter;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -25,9 +25,9 @@ public class DashboardController implements Initializable {
 
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
+    private final NavigationController navigationController;
     private final CurrencyFormatter currencyFormatter;
 
-    @FXML private ComboBox<String> currencyChooser;
     @FXML private Label netWorth;
     @FXML private Label totalAssets;
     @FXML private Label totalLiabilities;
@@ -42,25 +42,32 @@ public class DashboardController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        initializeCurrencyChooser();
+        registerCurrencyObservers();
+        updateSummaryLabels();
         updateNetWorthOverTimeChart();
         updateInvestedAvailableChart();
         updateAssetCategoryChart();
         updateExpensesChart();
-        updateSummaryLabels();
     }
 
-    private void initializeCurrencyChooser() {
+    private void registerCurrencyObservers() {
+        navigationController.registerCurrencyObserver(this::updateSummaryLabels);
+        navigationController.registerCurrencyObserver(this::updateNetWorthOverTimeChart);
+        navigationController.registerCurrencyObserver(this::updateInvestedAvailableChart);
+        navigationController.registerCurrencyObserver(this::updateAssetCategoryChart);
+        navigationController.registerCurrencyObserver(this::updateExpensesChart);
+    }
+
+    private void updateSummaryLabels() {
         // TODO: get values from actual services
-        currencyChooser.getItems().addAll(List.of("USD", "EUR", "GBP", "PLN"));
-        currencyChooser.setValue("USD");
-        currencyChooser.valueProperty().addListener((observable, oldValue, newValue) -> {
-            updateNetWorthOverTimeChart();
-            updateInvestedAvailableChart();
-            updateAssetCategoryChart();
-            updateExpensesChart();
-            updateSummaryLabels();
-        });
+        String currency = navigationController.getChosenCurrency();
+        netWorth.setText(currencyFormatter.format(BigDecimal.ONE, currency));
+        totalAssets.setText(currencyFormatter.format(BigDecimal.ONE, currency));
+        totalLiabilities.setText(currencyFormatter.format(BigDecimal.ONE, currency));
+        totalInvestments.setText(currencyFormatter.format(BigDecimal.ONE, currency));
+        totalAvailable.setText(currencyFormatter.format(BigDecimal.ONE, currency));
+        realizedGains.setText(currencyFormatter.format(BigDecimal.ONE, currency));
+        unrealizedGains.setText(currencyFormatter.format(BigDecimal.ONE, currency));
     }
 
     private void updateNetWorthOverTimeChart() {
@@ -120,18 +127,6 @@ public class DashboardController implements Initializable {
         expensesAverageSeries.setName("6 month average");
         expensesAverageSeries.getData().addAll(convertToPieChartData(sixMonthExpenseAverage));
         expensesChart.getData().addAll(List.of(expensesSeries, expensesAverageSeries));
-    }
-
-    private void updateSummaryLabels() {
-        // TODO: get values from actual services
-        String currency = currencyChooser.getValue();
-        netWorth.setText(currencyFormatter.format(BigDecimal.ONE, currency));
-        totalAssets.setText(currencyFormatter.format(BigDecimal.ONE, currency));
-        totalLiabilities.setText(currencyFormatter.format(BigDecimal.ONE, currency));
-        totalInvestments.setText(currencyFormatter.format(BigDecimal.ONE, currency));
-        totalAvailable.setText(currencyFormatter.format(BigDecimal.ONE, currency));
-        realizedGains.setText(currencyFormatter.format(BigDecimal.ONE, currency));
-        unrealizedGains.setText(currencyFormatter.format(BigDecimal.ONE, currency));
     }
 
     private List<XYChart.Data<String, Double>> convertToPieChartData(Map<ZonedDateTime, BigDecimal> data) {

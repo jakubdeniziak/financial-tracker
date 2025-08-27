@@ -1,37 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.Region?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.chart.LineChart?>
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.NumberAxis?>
-<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.jakubdeniziak.financialtracker.ui.controller.views.DashboardController">
 
-    <!-- TOP: Page title and currency chooser -->
+    <!-- TOP: Navigation -->
     <top>
-        <TabPane tabClosingPolicy="UNAVAILABLE">
-            <Tab text="Dashboard">
-                <VBox spacing="10">
-                    <HBox>
-                        <Label text="Dashboard" styleClass="page-header"/>
-                        <Region HBox.hgrow="ALWAYS"/>
-                        <ComboBox fx:id="currencyChooser" promptText="Select Currency" prefWidth="80"/>
-                    </HBox>
-                </VBox>
-            </Tab>
-        </TabPane>
+        <fx:include source="../elements/navigation.fxml"/>
     </top>
 
     <!-- CENTER: Summary metrics -->
