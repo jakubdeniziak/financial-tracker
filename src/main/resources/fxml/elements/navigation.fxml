@@ -7,7 +7,8 @@
 <HBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.jakubdeniziak.financialtracker.ui.controller.elements.NavigationController"
-      alignment="CENTER_LEFT"
+      spacing="10"
+      style="-fx-padding: 10;"
 >
 
     <Button text="Dashboard" onAction="#openDashboard"/>
