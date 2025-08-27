@@ -1,9 +1,8 @@
 package com.jakubdeniziak.financialtracker.ui.controller.views;
 
 import com.jakubdeniziak.financialtracker.domain.Asset;
-import com.jakubdeniziak.financialtracker.entity.AssetCategory;
-import com.jakubdeniziak.financialtracker.entity.AssetType;
 import com.jakubdeniziak.financialtracker.service.AssetService;
+import com.jakubdeniziak.financialtracker.ui.controller.dialog.AssetDialogController;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 @Component
@@ -21,6 +21,7 @@ import java.util.ResourceBundle;
 public class AssetsController implements Initializable {
 
     private final AssetService assetService;
+    private final AssetDialogController assetDialogController;
 
     @FXML private TableView<Asset> assetTable;
     @FXML private TableColumn<Asset, String> nameColumn;
@@ -42,16 +43,11 @@ public class AssetsController implements Initializable {
 
     @FXML
     public void onAdd() {
-        // TODO: add dialog implementation
-        Asset created = Asset.builder()
-                .name("Apple Inc")
-                .symbol("AAPL")
-                .category(AssetCategory.STOCK)
-                .type(AssetType.STOCK_COMMON)
-                .currency("USD")
-                .build();
-        assetService.save(created);
-        assetTable.setItems(FXCollections.observableArrayList(assetService.readAll()));
+        Optional<Asset> created = assetDialogController.display();
+        created.ifPresent(asset -> {
+            assetService.save(created.get());
+            assetTable.setItems(FXCollections.observableArrayList(assetService.readAll()));
+        });
     }
 
     @FXML

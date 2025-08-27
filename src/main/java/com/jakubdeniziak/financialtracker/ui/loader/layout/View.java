@@ -13,6 +13,12 @@ public enum View {
         public String getFilePath() {
             return "/fxml/views/assets.fxml";
         }
+    },
+    ASSET_DIALOG {
+        @Override
+        public String getFilePath() {
+            return "/fxml/dialog/asset_dialog.fxml";
+        }
     };
 
     public abstract String getFilePath();

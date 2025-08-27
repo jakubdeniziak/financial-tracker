@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<DialogPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.jakubdeniziak.financialtracker.ui.controller.dialog.AssetDialogController"
+>
+
+    <content>
+        <GridPane vgap="10">
+            <Label text="Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+            <TextField fx:id="nameField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+            <Label text="Symbol:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+            <TextField fx:id="symbolField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+            <Label text="Category:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+            <ComboBox fx:id="categoryBox" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+            <Label text="Type:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+            <ComboBox fx:id="typeBox" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+            <Label text="Currency:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+            <TextField fx:id="currencyField" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+        </GridPane>
+    </content>
+
+    <ButtonType fx:id="addButton" text="Add" buttonData="OK_DONE"/>
+    <ButtonType fx:id="cancelButton" text="Cancel" buttonData="CANCEL_CLOSE"/>
+</DialogPane>

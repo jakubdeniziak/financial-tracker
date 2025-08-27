@@ -15,3 +15,5 @@ application:
   title: "Financial tracker"
   width: 1280.0
   height: 900.0
+  asset-dialog:
+    title: "New asset"
