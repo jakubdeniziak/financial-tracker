@@ -9,6 +9,7 @@ public interface AssetService {
     void save(Asset asset);
     Asset read(long id);
     List<Asset> readAll();
+    void update(Asset asset);
     void delete(long id);
 
 }

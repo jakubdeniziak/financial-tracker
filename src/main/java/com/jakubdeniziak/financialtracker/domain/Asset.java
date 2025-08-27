@@ -2,12 +2,14 @@ package com.jakubdeniziak.financialtracker.domain;
 
 import com.jakubdeniziak.financialtracker.entity.AssetCategory;
 import com.jakubdeniziak.financialtracker.entity.AssetType;
+import lombok.Builder;
 import lombok.Value;
 
 @Value
+@Builder
 public class Asset {
 
-    long id;
+    Long id;
     String name;
     String symbol;
     AssetCategory category;

@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.jakubdeniziak.financialtracker.ui.controller.views.AssetsController"
@@ -24,5 +25,14 @@
             </columns>
         </TableView>
     </center>
+
+    <!-- BOTTOM: Action buttons -->
+    <bottom>
+        <HBox spacing="10" style="-fx-padding: 10;">
+            <Button text="Add" onAction="#onAdd"/>
+            <Button text="Edit" onAction="#onEdit"/>
+            <Button text="Delete" onAction="#onDelete"/>
+        </HBox>
+    </bottom>
 
 </BorderPane>
