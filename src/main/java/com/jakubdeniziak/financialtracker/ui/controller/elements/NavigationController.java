@@ -33,6 +33,11 @@ public class NavigationController implements Initializable {
         stageManager.switchScene(View.DASHBOARD);
     }
 
+    @FXML
+    public void openAssets(ActionEvent actionEvent) {
+        stageManager.switchScene(View.ASSETS);
+    }
+
     public void registerCurrencyObserver(Runnable observer) {
         currencyChooser.valueProperty().addListener((observable, oldValue, newValue) -> observer.run());
     }

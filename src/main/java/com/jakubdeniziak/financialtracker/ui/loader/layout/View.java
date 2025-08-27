@@ -7,6 +7,12 @@ public enum View {
         public String getFilePath() {
             return "/fxml/views/dashboard.fxml";
         }
+    },
+    ASSETS {
+        @Override
+        public String getFilePath() {
+            return "/fxml/views/assets.fxml";
+        }
     };
 
     public abstract String getFilePath();
