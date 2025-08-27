@@ -33,12 +33,9 @@ public class AssetDefaultService implements AssetService {
     }
 
     @Override
-    public void update(Asset asset) {
-        if (asset.getId() == null) {
-            throw new IllegalArgumentException("Cannot update asset without ID");
-        }
-        AssetEntity existing = repository.findById(asset.getId())
-                .orElseThrow(() -> new EntityNotFoundException("Asset not found with ID: " + asset.getId()));
+    public void update(Long id, Asset asset) {
+        AssetEntity existing = repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Asset not found with ID: " + id));
         existing.setName(asset.getName());
         existing.setSymbol(asset.getSymbol());
         existing.setCategory(asset.getCategory());

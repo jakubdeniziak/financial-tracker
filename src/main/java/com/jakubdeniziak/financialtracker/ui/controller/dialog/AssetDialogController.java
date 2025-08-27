@@ -5,12 +5,12 @@ import com.jakubdeniziak.financialtracker.entity.AssetCategory;
 import com.jakubdeniziak.financialtracker.entity.AssetType;
 import com.jakubdeniziak.financialtracker.ui.loader.layout.LayoutLoader;
 import com.jakubdeniziak.financialtracker.ui.loader.layout.View;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.net.URL;
@@ -22,9 +22,6 @@ import java.util.ResourceBundle;
 public class AssetDialogController implements Initializable {
 
     private final LayoutLoader layoutLoader;
-
-    @Value("${application.asset-dialog.title}")
-    private String title;
 
     @FXML private TextField nameField;
     @FXML private TextField symbolField;
@@ -40,7 +37,7 @@ public class AssetDialogController implements Initializable {
         typeBox.setItems(FXCollections.observableArrayList(AssetType.values()));
     }
 
-    public Optional<Asset> display() {
+    public Optional<Asset> showDialogAndWait(String title) {
         DialogPane dialogPane = (DialogPane) layoutLoader.load(View.ASSET_DIALOG);
         Dialog<Asset> dialog = new Dialog<>();
         dialog.setTitle(title);
@@ -58,6 +55,16 @@ public class AssetDialogController implements Initializable {
             return null;
         });
         return dialog.showAndWait();
+    }
+
+    public void setAsset(Asset asset) {
+        Platform.runLater(() -> {
+            nameField.setText(asset.getName());
+            symbolField.setText(asset.getSymbol());
+            categoryBox.setValue(asset.getCategory());
+            typeBox.setValue(asset.getType());
+            currencyField.setText(asset.getCurrency());
+        });
     }
 
 }

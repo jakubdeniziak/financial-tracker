@@ -32,7 +32,6 @@ public class AssetsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // TODO: get values from actual services
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         symbolColumn.setCellValueFactory(new PropertyValueFactory<>("symbol"));
         categoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
@@ -43,7 +42,7 @@ public class AssetsController implements Initializable {
 
     @FXML
     public void onAdd() {
-        Optional<Asset> created = assetDialogController.display();
+        Optional<Asset> created = assetDialogController.showDialogAndWait("Add asset");
         created.ifPresent(asset -> {
             assetService.save(created.get());
             assetTable.setItems(FXCollections.observableArrayList(assetService.readAll()));
@@ -52,21 +51,16 @@ public class AssetsController implements Initializable {
 
     @FXML
     public void onEdit() {
-        // TODO: add dialog implementation
         Asset selected = assetTable.getSelectionModel().getSelectedItem();
         if (selected == null) {
             return;
         }
-        Asset edited = Asset.builder()
-                .id(selected.getId())
-                .name("Tesla Inc")
-                .symbol("TSLA")
-                .category(selected.getCategory())
-                .type(selected.getType())
-                .currency(selected.getCurrency())
-                .build();
-        assetService.update(edited);
-        assetTable.setItems(FXCollections.observableArrayList(assetService.readAll()));
+        assetDialogController.setAsset(selected);
+        Optional<Asset> edited = assetDialogController.showDialogAndWait("Edit asset");
+        edited.ifPresent(asset -> {
+            assetService.update(selected.getId(), edited.get());
+            assetTable.setItems(FXCollections.observableArrayList(assetService.readAll()));
+        });
     }
 
     @FXML
