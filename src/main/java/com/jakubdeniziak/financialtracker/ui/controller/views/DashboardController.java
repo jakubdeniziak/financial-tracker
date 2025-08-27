@@ -1,4 +1,4 @@
-package com.jakubdeniziak.financialtracker.ui.controller;
+package com.jakubdeniziak.financialtracker.ui.controller.views;
 
 import com.jakubdeniziak.financialtracker.util.CurrencyFormatter;
 import javafx.fxml.FXML;
