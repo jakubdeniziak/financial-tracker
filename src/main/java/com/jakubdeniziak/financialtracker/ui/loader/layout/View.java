@@ -5,7 +5,13 @@ public enum View {
     DASHBOARD {
         @Override
         public String getFilePath() {
-            return "/fxml/dashboard.fxml";
+            return "/fxml/views/dashboard.fxml";
+        }
+    },
+    ASSETS {
+        @Override
+        public String getFilePath() {
+            return "/fxml/views/assets.fxml";
         }
     };
 
