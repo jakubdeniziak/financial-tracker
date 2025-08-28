@@ -1,4 +1,4 @@
-package com.jakubdeniziak.financialtracker.ui.controller.elements;
+package com.jakubdeniziak.financialtracker.ui.controller.element;
 
 import com.jakubdeniziak.financialtracker.ui.loader.layout.View;
 import com.jakubdeniziak.financialtracker.ui.manager.StageManager;
@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
 
 @Component
 @RequiredArgsConstructor
-public class NavigationController implements Initializable {
+public class NavigationViewController implements Initializable {
 
     private final StageManager stageManager;
 

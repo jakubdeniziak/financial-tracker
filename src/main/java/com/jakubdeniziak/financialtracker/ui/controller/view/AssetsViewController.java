@@ -1,4 +1,4 @@
-package com.jakubdeniziak.financialtracker.ui.controller.views;
+package com.jakubdeniziak.financialtracker.ui.controller.view;
 
 import com.jakubdeniziak.financialtracker.domain.Asset;
 import com.jakubdeniziak.financialtracker.service.AssetService;
@@ -18,7 +18,7 @@ import java.util.ResourceBundle;
 
 @Component
 @RequiredArgsConstructor
-public class AssetsController implements Initializable {
+public class AssetsViewController implements Initializable {
 
     private final AssetService assetService;
     private final AssetDialogController assetDialogController;

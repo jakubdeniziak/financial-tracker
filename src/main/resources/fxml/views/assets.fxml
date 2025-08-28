@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.HBox?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.jakubdeniziak.financialtracker.ui.controller.views.AssetsController"
+            fx:controller="com.jakubdeniziak.financialtracker.ui.controller.view.AssetsViewController"
 >
 
     <!-- TOP: Navigation -->

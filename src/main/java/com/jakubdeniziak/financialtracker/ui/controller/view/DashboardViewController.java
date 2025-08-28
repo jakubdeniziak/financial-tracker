@@ -1,6 +1,6 @@
-package com.jakubdeniziak.financialtracker.ui.controller.views;
+package com.jakubdeniziak.financialtracker.ui.controller.view;
 
-import com.jakubdeniziak.financialtracker.ui.controller.elements.NavigationController;
+import com.jakubdeniziak.financialtracker.ui.controller.element.NavigationViewController;
 import com.jakubdeniziak.financialtracker.util.CurrencyFormatter;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -21,11 +21,11 @@ import java.util.ResourceBundle;
 
 @Component
 @RequiredArgsConstructor
-public class DashboardController implements Initializable {
+public class DashboardViewController implements Initializable {
 
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-    private final NavigationController navigationController;
+    private final NavigationViewController navigationViewController;
     private final CurrencyFormatter currencyFormatter;
 
     @FXML private Label netWorth;
@@ -51,16 +51,16 @@ public class DashboardController implements Initializable {
     }
 
     private void registerCurrencyObservers() {
-        navigationController.registerCurrencyObserver(this::updateSummaryLabels);
-        navigationController.registerCurrencyObserver(this::updateNetWorthOverTimeChart);
-        navigationController.registerCurrencyObserver(this::updateInvestedAvailableChart);
-        navigationController.registerCurrencyObserver(this::updateAssetCategoryChart);
-        navigationController.registerCurrencyObserver(this::updateExpensesChart);
+        navigationViewController.registerCurrencyObserver(this::updateSummaryLabels);
+        navigationViewController.registerCurrencyObserver(this::updateNetWorthOverTimeChart);
+        navigationViewController.registerCurrencyObserver(this::updateInvestedAvailableChart);
+        navigationViewController.registerCurrencyObserver(this::updateAssetCategoryChart);
+        navigationViewController.registerCurrencyObserver(this::updateExpensesChart);
     }
 
     private void updateSummaryLabels() {
         // TODO: get values from actual services
-        String currency = navigationController.getChosenCurrency();
+        String currency = navigationViewController.getChosenCurrency();
         netWorth.setText(currencyFormatter.format(BigDecimal.ONE, currency));
         totalAssets.setText(currencyFormatter.format(BigDecimal.ONE, currency));
         totalLiabilities.setText(currencyFormatter.format(BigDecimal.ONE, currency));

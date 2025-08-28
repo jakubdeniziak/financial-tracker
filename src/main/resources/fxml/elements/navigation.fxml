@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.Region?>
 <HBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.jakubdeniziak.financialtracker.ui.controller.elements.NavigationController"
+      fx:controller="com.jakubdeniziak.financialtracker.ui.controller.element.NavigationViewController"
       spacing="10"
       style="-fx-padding: 10;"
 >
