@@ -1,5 +1,6 @@
 package com.jakubdeniziak.financialtracker.ui.controller.element;
 
+import com.jakubdeniziak.financialtracker.preferences.UserPreferences;
 import com.jakubdeniziak.financialtracker.ui.loader.layout.View;
 import com.jakubdeniziak.financialtracker.ui.manager.StageManager;
 import javafx.event.ActionEvent;
@@ -17,15 +18,18 @@ import java.util.ResourceBundle;
 @RequiredArgsConstructor
 public class NavigationViewController implements Initializable {
 
+    private static final List<String> CURRENCIES = List.of("USD", "EUR", "GBP", "PLN");
+
+    private final UserPreferences userPreferences;
     private final StageManager stageManager;
 
     @FXML private ComboBox<String> currencyChooser;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // TODO: get values from actual services
-        currencyChooser.getItems().addAll(List.of("USD", "EUR", "GBP", "PLN"));
-        currencyChooser.setValue("USD");
+        currencyChooser.getItems().addAll(CURRENCIES);
+        currencyChooser.setValue(userPreferences.getPreferredCurrency());
+        registerCurrencyObserver(() -> userPreferences.setPreferredCurrency(currencyChooser.getValue()));
     }
 
     @FXML
