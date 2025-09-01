@@ -26,6 +26,12 @@ public enum View {
             return "/fxml/dialogs/asset.fxml";
         }
     },
+    ASSET_PRICE_DIALOG {
+        @Override
+        public String getFilePath() {
+            return "/fxml/dialogs/asset_price.fxml";
+        }
+    },
     EXPENSE_DIALOG {
         @Override
         public String getFilePath() {

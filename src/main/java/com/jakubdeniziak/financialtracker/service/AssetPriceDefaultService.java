@@ -9,7 +9,9 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -32,6 +34,17 @@ public class AssetPriceDefaultService implements AssetPriceService {
     @Override
     public List<AssetPrice> readAll() {
         return assetPriceMapper.map(repository.findAll());
+    }
+
+    @Override
+    public Optional<BigDecimal> readLatestPriceForAsset(long assetId) {
+        return repository.findFirstByAssetIdOrderByRecordedAtDesc(assetId)
+                .map(AssetPriceEntity::getPrice);
+    }
+
+    @Override
+    public List<AssetPrice> readAllForAsset(long assetId) {
+        return assetPriceMapper.map(repository.findAllByAsset_Id(assetId));
     }
 
     @Override
