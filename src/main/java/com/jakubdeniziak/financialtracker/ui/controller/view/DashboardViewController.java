@@ -1,5 +1,7 @@
 package com.jakubdeniziak.financialtracker.ui.controller.view;
 
+import com.jakubdeniziak.financialtracker.domain.Expense;
+import com.jakubdeniziak.financialtracker.service.ExpenseService;
 import com.jakubdeniziak.financialtracker.ui.controller.element.NavigationViewController;
 import com.jakubdeniziak.financialtracker.util.CurrencyFormatter;
 import javafx.fxml.FXML;
@@ -13,8 +15,9 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.net.URL;
-import java.time.ZonedDateTime;
+import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -23,10 +26,12 @@ import java.util.ResourceBundle;
 @RequiredArgsConstructor
 public class DashboardViewController implements Initializable {
 
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private static final DateTimeFormatter YEAR_MONTH_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM");
+    private static final int DEFAULT_EXPENSE_AVERAGE_PERIOD = 6;
 
-    private final NavigationViewController navigationViewController;
+    private final ExpenseService expenseService;
     private final CurrencyFormatter currencyFormatter;
+    private final NavigationViewController navigationViewController;
 
     @FXML private Label netWorth;
     @FXML private Label totalAssets;
@@ -72,10 +77,10 @@ public class DashboardViewController implements Initializable {
 
     private void updateNetWorthOverTimeChart() {
         // TODO: get values from actual services
-        Map<ZonedDateTime, BigDecimal> data = Map.of(
-                ZonedDateTime.parse("2025-08-01T00:00:00Z"), new BigDecimal("100"),
-                ZonedDateTime.parse("2025-08-02T00:00:00Z"), new BigDecimal("125"),
-                ZonedDateTime.parse("2025-08-03T00:00:00Z"), new BigDecimal("110")
+        Map<YearMonth, BigDecimal> data = Map.of(
+                YearMonth.parse("2025-08"), new BigDecimal("100"),
+                YearMonth.parse("2025-09"), new BigDecimal("125"),
+                YearMonth.parse("2025-10"), new BigDecimal("110")
         );
         netWorthOverTimeChart.getData().clear();
         XYChart.Series<String, Double> series = new XYChart.Series<>();
@@ -108,33 +113,31 @@ public class DashboardViewController implements Initializable {
     }
 
     private void updateExpensesChart() {
-        // TODO: get values from actual services
-        Map<ZonedDateTime, BigDecimal> expensesOverTime = Map.of(
-                ZonedDateTime.parse("2025-08-01T00:00:00Z"), new BigDecimal("100"),
-                ZonedDateTime.parse("2025-09-01T00:00:00Z"), new BigDecimal("125"),
-                ZonedDateTime.parse("2025-10-01T00:00:00Z"), new BigDecimal("110")
-        );
-        Map<ZonedDateTime, BigDecimal> sixMonthExpenseAverage = Map.of(
-                ZonedDateTime.parse("2025-08-01T00:00:00Z"), new BigDecimal("80"),
-                ZonedDateTime.parse("2025-09-01T00:00:00Z"), new BigDecimal("150"),
-                ZonedDateTime.parse("2025-10-01T00:00:00Z"), new BigDecimal("80")
-        );
         expensesChart.getData().clear();
         XYChart.Series<String, Double> expensesSeries = new XYChart.Series<>();
         expensesSeries.setName("Expenses");
-        expensesSeries.getData().addAll(convertToPieChartData(expensesOverTime));
+        expensesSeries.getData().addAll(convertToPieChartData(expenseService.readAll()));
         XYChart.Series<String, Double> expensesAverageSeries = new XYChart.Series<>();
         expensesAverageSeries.setName("6 month average");
-        expensesAverageSeries.getData().addAll(convertToPieChartData(sixMonthExpenseAverage));
+        expensesAverageSeries.getData().addAll(convertToPieChartData(expenseService.calculateRollingAverage(DEFAULT_EXPENSE_AVERAGE_PERIOD)));
         expensesChart.getData().addAll(List.of(expensesSeries, expensesAverageSeries));
     }
 
-    private List<XYChart.Data<String, Double>> convertToPieChartData(Map<ZonedDateTime, BigDecimal> data) {
-        return data.entrySet()
-                .stream()
+    private List<XYChart.Data<String, Double>> convertToPieChartData(List<Expense> expenses) {
+        return expenses.stream()
+                .sorted(Comparator.comparing(Expense::getYearMonth))
+                .map(expense -> new XYChart.Data<>(
+                        expense.getYearMonth().format(YEAR_MONTH_FORMATTER),
+                        expense.getAmount().doubleValue()
+                ))
+                .toList();
+    }
+
+    private List<XYChart.Data<String, Double>> convertToPieChartData(Map<YearMonth, BigDecimal> data) {
+        return data.entrySet().stream()
                 .sorted(Map.Entry.comparingByKey())
                 .map(entry -> new XYChart.Data<>(
-                        entry.getKey().format(FORMATTER),
+                        entry.getKey().format(YEAR_MONTH_FORMATTER),
                         entry.getValue().doubleValue()))
                 .toList();
     }
