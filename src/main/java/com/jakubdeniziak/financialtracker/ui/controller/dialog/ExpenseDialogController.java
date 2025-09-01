@@ -29,6 +29,7 @@ public class ExpenseDialogController implements Initializable {
 
     @FXML private DatePicker monthPicker;
     @FXML private TextField amountField;
+    @FXML private TextField currencyField;
     @FXML private ButtonType addButton;
     @FXML private ButtonType cancelButton;
 
@@ -48,6 +49,7 @@ public class ExpenseDialogController implements Initializable {
                 return Expense.builder()
                         .yearMonth(YearMonth.from(monthPicker.getValue()))
                         .amount(new BigDecimal(amountField.getText()))
+                        .currency(currencyField.getText())
                         .build();
             }
             return null;
@@ -58,7 +60,8 @@ public class ExpenseDialogController implements Initializable {
     public void setExpense(Expense expense) {
         Platform.runLater(() -> {
            monthPicker.setValue(expense.getYearMonth().atDay(1));
-           amountField.setText(String.valueOf(expense.getAmount()));
+           amountField.setText(expense.getAmount().toString());
+           currencyField.setText(expense.getCurrency());
         });
     }
 

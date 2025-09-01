@@ -13,5 +13,6 @@ public class Expense {
     Long id;
     YearMonth yearMonth;
     BigDecimal amount;
+    String currency;
 
 }

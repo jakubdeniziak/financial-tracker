@@ -41,6 +41,7 @@ public class ExpenseDefaultService implements ExpenseService {
                 .orElseThrow(() -> new EntityNotFoundException("Expense not found with ID: " + id));
         existing.setYearMonth(expense.getYearMonth());
         existing.setAmount(expense.getAmount());
+        existing.setCurrency(expense.getCurrency());
         repository.save(existing);
     }
 

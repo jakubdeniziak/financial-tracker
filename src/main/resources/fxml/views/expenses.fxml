@@ -19,6 +19,7 @@
             <columns>
                 <TableColumn fx:id="monthYearColumn" text="Month"/>
                 <TableColumn fx:id="amountColumn" text="Amount"/>
+                <TableColumn fx:id="currencyColumn" text="Currency"/>
             </columns>
         </TableView>
     </center>

@@ -25,12 +25,14 @@ public class ExpensesViewController implements Initializable {
     @FXML private TableView<Expense> expenseTable;
     @FXML private TableColumn<Expense, String> monthYearColumn;
     @FXML private TableColumn<Expense, String> amountColumn;
+    @FXML private TableColumn<Expense, String> currencyColumn;
 
     @Override
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
         monthYearColumn.setCellValueFactory(new PropertyValueFactory<>("yearMonth"));
         amountColumn.setCellValueFactory(new PropertyValueFactory<>("amount"));
+        currencyColumn.setCellValueFactory(new PropertyValueFactory<>("currency"));
         expenseTable.setItems(FXCollections.observableArrayList(expenseService.readAll()));
     }
 
