@@ -2,8 +2,8 @@ package com.jakubdeniziak.financialtracker.service;
 
 import com.jakubdeniziak.financialtracker.domain.Transaction;
 import com.jakubdeniziak.financialtracker.entity.TransactionEntity;
-import com.jakubdeniziak.financialtracker.mapper.AssetMapper;
 import com.jakubdeniziak.financialtracker.mapper.TransactionMapper;
+import com.jakubdeniziak.financialtracker.repository.AssetJpaRepository;
 import com.jakubdeniziak.financialtracker.repository.TransactionJpaRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -15,28 +15,28 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TransactionDefaultService implements TransactionService {
 
-    private final TransactionJpaRepository repository;
+    private final TransactionJpaRepository transactionRepository;
     private final TransactionMapper transactionMapper;
-    private final AssetMapper assetMapper;
+    private final AssetJpaRepository assetRepository;
 
     @Override
     public void create(Transaction transaction) {
-        repository.save(transactionMapper.map(transaction));
+        transactionRepository.save(transactionMapper.map(transaction));
     }
 
     @Override
     public Transaction read(Long id) {
-        return transactionMapper.map(repository.findById(id).orElseThrow(EntityNotFoundException::new));
+        return transactionMapper.map(transactionRepository.findById(id).orElseThrow(EntityNotFoundException::new));
     }
 
     @Override
     public List<Transaction> readAll() {
-        return transactionMapper.map(repository.findAll());
+        return transactionMapper.map(transactionRepository.findAll());
     }
 
     @Override
     public void update(Long id, Transaction transaction) {
-        TransactionEntity existing = repository.findById(id)
+        TransactionEntity existing = transactionRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Transaction not found with ID: " + id));
         existing.setType(transaction.getType());
         existing.setQuantity(transaction.getQuantity());
@@ -44,13 +44,14 @@ public class TransactionDefaultService implements TransactionService {
         existing.setCurrency(transaction.getCurrency());
         existing.setExecutedAt(transaction.getExecutedAt());
         existing.setNotes(transaction.getNotes());
-        existing.setAsset(assetMapper.map(transaction.getAsset()));
-        repository.save(existing);
+        existing.setAsset(assetRepository.findById(transaction.getAsset().getId())
+                .orElseThrow(() -> new EntityNotFoundException("Asset not found with ID: " + transaction.getAsset().getId())));
+        transactionRepository.save(existing);
     }
 
     @Override
     public void delete(Long id) {
-        repository.deleteById(id);
+        transactionRepository.deleteById(id);
     }
 
 }

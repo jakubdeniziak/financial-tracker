@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<DialogPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.jakubdeniziak.financialtracker.ui.controller.dialog.TransactionDialogController"
+>
+
+    <content>
+        <GridPane vgap="10">
+            <Label text="Type:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+            <ComboBox fx:id="typeBox" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+            <Label text="Quantity:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+            <TextField fx:id="quantityField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+            <Label text="Price per unit:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+            <TextField fx:id="pricePerUnitField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+            <Label text="Currency:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+            <TextField fx:id="currencyField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+            <Label text="ExecutedAt:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+            <HBox spacing="5" GridPane.rowIndex="4" GridPane.columnIndex="1">
+                <DatePicker fx:id="executedAtDatePicker"/>
+                <Spinner fx:id="executedAtHourSpinner"/>
+                <Spinner fx:id="executedAtMinuteSpinner"/>
+            </HBox>
+
+            <Label text="Notes:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+            <TextField fx:id="notesField" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+
+            <Label text="Asset:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+            <ComboBox fx:id="assetBox" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+        </GridPane>
+    </content>
+
+    <ButtonType fx:id="addButton" text="Add" buttonData="OK_DONE"/>
+    <ButtonType fx:id="cancelButton" text="Cancel" buttonData="CANCEL_CLOSE"/>
+</DialogPane>

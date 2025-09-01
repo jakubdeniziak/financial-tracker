@@ -43,6 +43,11 @@ public class NavigationViewController implements Initializable {
     }
 
     @FXML
+    public void openTransactions() {
+        stageManager.switchScene(View.TRANSACTIONS);
+    }
+
+    @FXML
     public void openExpenses(ActionEvent actionEvent) {
         stageManager.switchScene(View.EXPENSES);
     }
