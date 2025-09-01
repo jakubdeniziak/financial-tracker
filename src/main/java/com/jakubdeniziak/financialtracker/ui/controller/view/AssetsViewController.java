@@ -13,7 +13,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.net.URL;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 @Component
@@ -42,9 +41,8 @@ public class AssetsViewController implements Initializable {
 
     @FXML
     public void onAdd() {
-        Optional<Asset> created = assetDialogController.showDialogAndWait("Add asset");
-        created.ifPresent(asset -> {
-            assetService.save(created.get());
+        assetDialogController.showDialogAndWait("Add asset").ifPresent(asset -> {
+            assetService.save(asset);
             assetTable.setItems(FXCollections.observableArrayList(assetService.readAll()));
         });
     }
@@ -56,9 +54,8 @@ public class AssetsViewController implements Initializable {
             return;
         }
         assetDialogController.setAsset(selected);
-        Optional<Asset> edited = assetDialogController.showDialogAndWait("Edit asset");
-        edited.ifPresent(asset -> {
-            assetService.update(selected.getId(), edited.get());
+        assetDialogController.showDialogAndWait("Edit asset").ifPresent(asset -> {
+            assetService.update(selected.getId(), asset);
             assetTable.setItems(FXCollections.observableArrayList(assetService.readAll()));
         });
     }
