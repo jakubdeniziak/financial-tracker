@@ -23,13 +23,13 @@ public enum View {
     ASSET_DIALOG {
         @Override
         public String getFilePath() {
-            return "/fxml/dialog/asset_dialog.fxml";
+            return "/fxml/dialogs/asset.fxml";
         }
     },
     EXPENSE_DIALOG {
         @Override
         public String getFilePath() {
-            return "/fxml/dialog/expense.fxml";
+            return "/fxml/dialogs/expense.fxml";
         }
     };
 
