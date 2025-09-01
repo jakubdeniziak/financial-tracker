@@ -14,10 +14,22 @@ public enum View {
             return "/fxml/views/assets.fxml";
         }
     },
+    EXPENSES {
+        @Override
+        public String getFilePath() {
+            return "/fxml/views/expenses.fxml";
+        }
+    },
     ASSET_DIALOG {
         @Override
         public String getFilePath() {
             return "/fxml/dialog/asset_dialog.fxml";
+        }
+    },
+    EXPENSE_DIALOG {
+        @Override
+        public String getFilePath() {
+            return "/fxml/dialog/expense.fxml";
         }
     };
 

@@ -42,6 +42,11 @@ public class NavigationViewController implements Initializable {
         stageManager.switchScene(View.ASSETS);
     }
 
+    @FXML
+    public void openExpenses(ActionEvent actionEvent) {
+        stageManager.switchScene(View.EXPENSES);
+    }
+
     public void registerCurrencyObserver(Runnable observer) {
         currencyChooser.valueProperty().addListener((observable, oldValue, newValue) -> observer.run());
     }

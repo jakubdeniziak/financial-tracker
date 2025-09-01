@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.jakubdeniziak.financialtracker.ui.controller.view.ExpensesViewController"
+>
+
+    <!-- TOP: Navigation -->
+    <top>
+        <fx:include source="../elements/navigation.fxml"/>
+    </top>
+
+    <!-- CENTER: Expense table -->
+    <center>
+        <TableView fx:id="expenseTable">
+            <columns>
+                <TableColumn fx:id="monthYearColumn" text="Month"/>
+                <TableColumn fx:id="amountColumn" text="Amount"/>
+            </columns>
+        </TableView>
+    </center>
+
+    <!-- BOTTOM: Action buttons -->
+    <bottom>
+        <HBox spacing="10" style="-fx-padding: 10;">
+            <Button text="Add" onAction="#onAdd"/>
+            <Button text="Edit" onAction="#onEdit"/>
+            <Button text="Delete" onAction="#onDelete"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

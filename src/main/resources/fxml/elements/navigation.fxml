@@ -13,6 +13,7 @@
 
     <Button text="Dashboard" onAction="#openDashboard"/>
     <Button text="Assets" onAction="#openAssets"/>
+    <Button text="Expenses" onAction="#openExpenses"/>
     <Region HBox.hgrow="ALWAYS"/>
     <ComboBox fx:id="currencyChooser" />
 
