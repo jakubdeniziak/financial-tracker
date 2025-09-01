@@ -18,12 +18,12 @@ public class AssetDefaultService implements AssetService {
     private final AssetMapper mapper;
 
     @Override
-    public void save(Asset asset) {
+    public void create(Asset asset) {
         repository.save(mapper.map(asset));
     }
 
     @Override
-    public Asset read(long id) {
+    public Asset read(Long id) {
         return mapper.map(repository.findById(id).orElseThrow(EntityNotFoundException::new));
     }
 
@@ -45,7 +45,7 @@ public class AssetDefaultService implements AssetService {
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(Long id) {
         repository.deleteById(id);
     }
 

@@ -26,7 +26,7 @@ public class ExpenseDefaultService implements ExpenseService {
     }
 
     @Override
-    public Expense read(long id) {
+    public Expense read(Long id) {
         return mapper.map(repository.findById(id).orElseThrow(EntityNotFoundException::new));
     }
 
@@ -36,7 +36,7 @@ public class ExpenseDefaultService implements ExpenseService {
     }
 
     @Override
-    public void update(long id, Expense expense) {
+    public void update(Long id, Expense expense) {
         ExpenseEntity existing = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Expense not found with ID: " + id));
         existing.setYearMonth(expense.getYearMonth());
@@ -45,7 +45,7 @@ public class ExpenseDefaultService implements ExpenseService {
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(Long id) {
         repository.deleteById(id);
     }
 

@@ -1,6 +1,8 @@
 package com.jakubdeniziak.financialtracker.service;
 
 import com.jakubdeniziak.financialtracker.domain.AssetPrice;
+import com.jakubdeniziak.financialtracker.entity.AssetPriceEntity;
+import com.jakubdeniziak.financialtracker.mapper.AssetMapper;
 import com.jakubdeniziak.financialtracker.mapper.AssetPriceMapper;
 import com.jakubdeniziak.financialtracker.repository.AssetPriceJpaRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -14,25 +16,37 @@ import java.util.List;
 public class AssetPriceDefaultService implements AssetPriceService {
 
     private final AssetPriceJpaRepository repository;
-    private final AssetPriceMapper mapper;
+    private final AssetPriceMapper assetPriceMapper;
+    private final AssetMapper assetMapper;
 
     @Override
-    public void save(AssetPrice assetPrice) {
-        repository.save(mapper.map(assetPrice));
+    public void create(AssetPrice assetPrice) {
+        repository.save(assetPriceMapper.map(assetPrice));
     }
 
     @Override
-    public AssetPrice read(long id) {
-        return mapper.map(repository.findById(id).orElseThrow(EntityNotFoundException::new));
+    public AssetPrice read(Long id) {
+        return assetPriceMapper.map(repository.findById(id).orElseThrow(EntityNotFoundException::new));
     }
 
     @Override
     public List<AssetPrice> readAll() {
-        return mapper.map(repository.findAll());
+        return assetPriceMapper.map(repository.findAll());
     }
 
     @Override
-    public void delete(long id) {
+    public void update(Long id, AssetPrice assetPrice) {
+        AssetPriceEntity existing = repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("AssetPrice not found with ID: " + id));
+        existing.setAsset(assetMapper.map(assetPrice.getAsset()));
+        existing.setPrice(assetPrice.getPrice());
+        existing.setCurrency(assetPrice.getCurrency());
+        existing.setRecordedAt(assetPrice.getRecordedAt());
+        repository.save(existing);
+    }
+
+    @Override
+    public void delete(Long id) {
         repository.deleteById(id);
     }
 

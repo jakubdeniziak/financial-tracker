@@ -42,7 +42,7 @@ public class AssetsViewController implements Initializable {
     @FXML
     public void onAdd() {
         assetDialogController.showDialogAndWait("Add asset").ifPresent(asset -> {
-            assetService.save(asset);
+            assetService.create(asset);
             assetTable.setItems(FXCollections.observableArrayList(assetService.readAll()));
         });
     }
