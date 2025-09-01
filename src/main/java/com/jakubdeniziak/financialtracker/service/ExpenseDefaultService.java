@@ -22,7 +22,7 @@ public class ExpenseDefaultService implements ExpenseService {
 
     @Override
     public void create(Expense expense) {
-
+        repository.save(mapper.map(expense));
     }
 
     @Override
