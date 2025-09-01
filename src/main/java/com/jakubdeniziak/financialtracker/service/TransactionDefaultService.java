@@ -15,9 +15,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TransactionDefaultService implements TransactionService {
 
-    private TransactionJpaRepository repository;
-    private TransactionMapper transactionMapper;
-    private AssetMapper assetMapper;
+    private final TransactionJpaRepository repository;
+    private final TransactionMapper transactionMapper;
+    private final AssetMapper assetMapper;
 
     @Override
     public void create(Transaction transaction) {
