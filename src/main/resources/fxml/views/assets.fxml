@@ -22,7 +22,7 @@
                 <TableColumn fx:id="categoryColumn" text="Category"/>
                 <TableColumn fx:id="typeColumn" text="Type"/>
                 <TableColumn fx:id="currencyColumn" text="Currency"/>
-                <TableColumn fx:id="priceColumn" text="Asset price"/>
+                <TableColumn fx:id="priceColumn" text="Price history"/>
             </columns>
         </TableView>
     </center>
