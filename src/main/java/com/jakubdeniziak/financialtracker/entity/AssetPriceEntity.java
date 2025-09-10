@@ -23,8 +23,6 @@ public class AssetPriceEntity {
 
     private BigDecimal price;
 
-    private String currency;
-
     private ZonedDateTime recordedAt;
 
     @ManyToOne

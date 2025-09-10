@@ -44,7 +44,6 @@ public class AssetPriceDialogController {
         AssetPrice assetPrice = AssetPrice.builder()
                 .asset(asset)
                 .price(price)
-                .currency(asset.getCurrency())
                 .recordedAt(recordedAt)
                 .build();
         assetPriceService.create(assetPrice);

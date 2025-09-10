@@ -13,7 +13,6 @@ public class AssetPrice {
     long id;
     Asset asset;
     BigDecimal price;
-    String currency;
     ZonedDateTime recordedAt;
 
 }

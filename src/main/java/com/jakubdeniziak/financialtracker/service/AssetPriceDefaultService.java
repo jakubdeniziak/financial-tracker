@@ -53,7 +53,6 @@ public class AssetPriceDefaultService implements AssetPriceService {
                 .orElseThrow(() -> new EntityNotFoundException("AssetPrice not found with ID: " + id));
         existing.setAsset(assetMapper.map(assetPrice.getAsset()));
         existing.setPrice(assetPrice.getPrice());
-        existing.setCurrency(assetPrice.getCurrency());
         existing.setRecordedAt(assetPrice.getRecordedAt());
         repository.save(existing);
     }
