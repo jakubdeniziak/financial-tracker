@@ -23,7 +23,7 @@ public class AssetPriceDialogController {
     private final LayoutLoader layoutLoader;
 
     @FXML private Label nameLabel;
-    @FXML private Label currentPriceLabel;
+    @FXML private Label latestPriceLabel;
     @FXML private LineChart<String, Double> priceChart;
 
     public void showDialogAndWait(String title, Asset asset) {
@@ -37,16 +37,16 @@ public class AssetPriceDialogController {
 
     private void initializeElements(Asset asset) {
         nameLabel.setText(asset.getName());
-        initializeCurrentPriceLabel(asset);
+        initializeLatestPriceLabel(asset);
         initializePriceChart(asset.getId());
     }
 
-    private void initializeCurrentPriceLabel(Asset asset) {
-        String currentPrice = assetPriceService.readLatestPriceForAsset(asset.getId())
+    private void initializeLatestPriceLabel(Asset asset) {
+        String latestPrice = assetPriceService.readLatestPriceForAsset(asset.getId())
                 .map(BigDecimal::toString)
                 .orElse("?");
-        String labelText = String.format("Current Price: %s %s", currentPrice, asset.getCurrency());
-        currentPriceLabel.setText(labelText);
+        String labelText = String.format("Latest price: %s %s", latestPrice, asset.getCurrency());
+        latestPriceLabel.setText(labelText);
     }
 
     private void initializePriceChart(long assetId) {

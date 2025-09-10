@@ -15,7 +15,7 @@
     <content>
         <VBox spacing="10" style="-fx-padding: 10;">
             <Label fx:id="nameLabel" style="-fx-font-weight: bold;"/>
-            <Label fx:id="currentPriceLabel"/>
+            <Label fx:id="latestPriceLabel"/>
             <LineChart fx:id="priceChart" prefHeight="200" prefWidth="400">
                 <xAxis>
                     <CategoryAxis label="Time"/>
