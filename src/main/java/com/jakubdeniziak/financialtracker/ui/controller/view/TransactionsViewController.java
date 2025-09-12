@@ -30,7 +30,6 @@ public class TransactionsViewController implements Initializable {
     @FXML private TableColumn<Transaction, TransactionType> typeColumn;
     @FXML private TableColumn<Transaction, BigDecimal> quantityColumn;
     @FXML private TableColumn<Transaction, BigDecimal> pricePerUnitColumn;
-    @FXML private TableColumn<Transaction, String> currencyColumn;
     @FXML private TableColumn<Transaction, ZonedDateTime> executedAtColumn;
     @FXML private TableColumn<Transaction, String> notesColumn;
     @FXML private TableColumn<Transaction, Asset> assetColumn;
@@ -41,7 +40,6 @@ public class TransactionsViewController implements Initializable {
         typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
         quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         pricePerUnitColumn.setCellValueFactory(new PropertyValueFactory<>("pricePerUnit"));
-        currencyColumn.setCellValueFactory(new PropertyValueFactory<>("currency"));
         executedAtColumn.setCellValueFactory(new PropertyValueFactory<>("executedAt"));
         notesColumn.setCellValueFactory(new PropertyValueFactory<>("notes"));
         assetColumn.setCellValueFactory(new PropertyValueFactory<>("asset"));

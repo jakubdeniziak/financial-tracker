@@ -18,9 +18,6 @@
             <Label text="Price per unit:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
             <TextField fx:id="pricePerUnitField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
 
-            <Label text="Currency:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
-            <TextField fx:id="currencyField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
-
             <Label text="ExecutedAt:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
             <HBox spacing="5" GridPane.rowIndex="4" GridPane.columnIndex="1">
                 <DatePicker fx:id="executedAtDatePicker"/>

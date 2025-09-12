@@ -41,7 +41,6 @@ public class TransactionDefaultService implements TransactionService {
         existing.setType(transaction.getType());
         existing.setQuantity(transaction.getQuantity());
         existing.setPricePerUnit(transaction.getPricePerUnit());
-        existing.setCurrency(transaction.getCurrency());
         existing.setExecutedAt(transaction.getExecutedAt());
         existing.setNotes(transaction.getNotes());
         existing.setAsset(assetRepository.findById(transaction.getAsset().getId())

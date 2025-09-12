@@ -28,8 +28,6 @@ public class TransactionEntity {
 
     private BigDecimal pricePerUnit;
 
-    private String currency;
-
     private ZonedDateTime executedAt;
 
     private String notes;

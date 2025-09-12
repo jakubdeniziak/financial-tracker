@@ -15,7 +15,6 @@ public class Transaction {
     TransactionType type;
     BigDecimal quantity;
     BigDecimal pricePerUnit;
-    String currency;
     ZonedDateTime executedAt;
     String notes;
     Asset asset;

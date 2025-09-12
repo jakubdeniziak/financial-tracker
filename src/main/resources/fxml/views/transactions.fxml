@@ -20,7 +20,6 @@
                 <TableColumn fx:id="typeColumn" text="Type"/>
                 <TableColumn fx:id="quantityColumn" text="Quantity"/>
                 <TableColumn fx:id="pricePerUnitColumn" text="Price per unit"/>
-                <TableColumn fx:id="currencyColumn" text="Currency"/>
                 <TableColumn fx:id="executedAtColumn" text="Executed at"/>
                 <TableColumn fx:id="notesColumn" text="Notes"/>
                 <TableColumn fx:id="assetColumn" text="Asset"/>

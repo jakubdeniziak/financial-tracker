@@ -30,7 +30,6 @@ public class TransactionDialogController implements Initializable {
     @FXML private ComboBox<TransactionType> typeBox;
     @FXML private TextField quantityField;
     @FXML private TextField pricePerUnitField;
-    @FXML private TextField currencyField;
     @FXML private DatePicker executedAtDatePicker;
     @FXML private Spinner<Integer> executedAtHourSpinner;
     @FXML private Spinner<Integer> executedAtMinuteSpinner;
@@ -59,7 +58,6 @@ public class TransactionDialogController implements Initializable {
                         .type(typeBox.getValue())
                         .quantity(new BigDecimal(quantityField.getText()))
                         .pricePerUnit(new BigDecimal(pricePerUnitField.getText()))
-                        .currency(currencyField.getText())
                         .executedAt(getExecutedAt())
                         .notes(notesField.getText())
                         .asset(assetBox.getValue())
@@ -75,7 +73,6 @@ public class TransactionDialogController implements Initializable {
             typeBox.getSelectionModel().select(transaction.getType());
             quantityField.setText(transaction.getQuantity().toString());
             pricePerUnitField.setText(transaction.getPricePerUnit().toString());
-            currencyField.setText(transaction.getCurrency());
             executedAtDatePicker.setValue(transaction.getExecutedAt().toLocalDate());
             executedAtHourSpinner.getValueFactory().setValue(transaction.getExecutedAt().getHour());
             executedAtMinuteSpinner.getValueFactory().setValue(transaction.getExecutedAt().getMinute());
